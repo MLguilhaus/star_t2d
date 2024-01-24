@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+import os
+import re
+
+configfile: "config/config.yml"
+
+## Load samples & set all columns to strings
+df = pd.read_table(config['samples'])
+
+## Check there are accessions
+n = len(df.accession)
+assert (n > 0), "No accessions were specified. Please add at least one SRA ID"
+
+## Define key values
+accessions = df.accession
+
+## Constrain wildcards
+wildcard_constraints:
+	accession = "(" + '|'.join(accessions) + ")",
+
+# All subsequent paths
+raw_path = os.path.join("data", "fastq", "raw")
+
+# Define se fastq output only
+ALL_FQ = expand(
+    os.path.join(raw_path, "{f}.fastq.gz"),
+    f = accessions
+)
+
+ALL_OUTPUTS = []
+ALL_OUTPUTS.extend(ALL_FQ)
+
+rule all:
+	input:
+		ALL_OUTPUTS
+
+include: "rules/fasterq-dump.smk"
