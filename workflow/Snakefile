@@ -9,11 +9,11 @@ configfile: "config/config.yml"
 df = pd.read_table(config['samples'])
 
 ## Check there are accessions
-n = len(df.accession)
+n = len(df.Run)
 assert (n > 0), "No accessions were specified. Please add at least one SRA ID"
 
 ## Define key values
-accessions = df.accession
+accessions = df.Run
 
 ## Constrain wildcards
 wildcard_constraints:
@@ -24,8 +24,8 @@ raw_path = os.path.join("data", "fastq", "raw")
 
 # Define se fastq output only
 ALL_FQ = expand(
-    os.path.join(raw_path, "{f}.fastq.gz"),
-    f = accessions
+    os.path.join(raw_path, "{f}_{r}.fastq.gz"),
+	r = ['1', '2'], f = accessions
 )
 
 ALL_OUTPUTS = []
