@@ -21,18 +21,31 @@ wildcard_constraints:
 
 # All subsequent paths
 raw_path = os.path.join("data", "fastq", "raw")
+trim_path = os.path.join("data", "fastq", "trimmed")
+fastp_outpath = os.path.join("output", "fastp")
+log_path = os.path.join("workflow", "logs")
 
 # Define se fastq output only
-ALL_FQ = expand(
-    os.path.join(raw_path, "{f}_{r}.fastq.gz"),
-	r = ['1', '2'], f = accessions
+#ALL_FQ = expand(
+#    os.path.join(raw_path, "{f}_{r}.fastq.gz"),
+#	r = ['1', '2'], f = accessions
+#)
+#ALL_FP = expand(
+#    os.path.join(fastp_outpath, "{f}_fastp.{suffix}"),
+#	 f = accessions, suffix = ['json', 'html']
+#)
+ALL_MD5 = expand(
+	os.path.join("{path}", "md5sums.txt"),
+	path = [raw_path, trim_path]
 )
 
 ALL_OUTPUTS = []
-ALL_OUTPUTS.extend(ALL_FQ)
+ALL_OUTPUTS.extend(ALL_MD5)
+#ALL_OUTPUTS.extend(ALL_FP)
 
 rule all:
 	input:
 		ALL_OUTPUTS
 
 include: "rules/fasterq-dump.smk"
+include: "rules/fastp.smk"

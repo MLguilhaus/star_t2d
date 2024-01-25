@@ -1,1 +1,8 @@
 samples: "config/test_samples.tsv"
+
+fastp:
+  average_qual: 30
+  cut_mean_quality: 30
+  length_required: 50
+  n_base_limit: 1
+  extra: "--overrepresentation_analysis" 
