@@ -12,3 +12,20 @@ rule get_fastq:
         runtime = "2h"    
     script:
         "../scripts/fasterq-dump.py" # Taken from the wrapper
+
+rule raw_md5sums:
+    input: 
+        expand(
+            os.path.join(raw_path, "{sample}{tag}.fastq.gz"),
+            sample = accessions, 
+            tag = ['_1', '_2']
+        )
+    output: 
+        os.path.join(raw_path, "md5sums.txt")
+    threads: 1
+    resources:
+        runtime="10m"
+    shell:
+        """
+        md5sum {input} > {output}
+        """
