@@ -1,4 +1,4 @@
-samples: "config/test_samples.tsv"
+samples: "config/female_samples.tsv"
 
 fastp:
   average_qual: 30
@@ -6,3 +6,11 @@ fastp:
   length_required: 50
   n_base_limit: 1
   extra: "--overrepresentation_analysis" 
+
+star: 
+  out_samattributes: "Standard"
+  out_samtype: "BAM SortedByCoordinate"
+  out_samunmapped: "Within KeepPairs" #unsuure if we want 'keep pairs'
+  multimap_nmax: 10
+  mismatch_nmax: 10
+  #extra: 

@@ -24,6 +24,7 @@ raw_path = os.path.join("data", "fastq", "raw")
 trim_path = os.path.join("data", "fastq", "trimmed")
 fastp_outpath = os.path.join("output", "fastp")
 log_path = os.path.join("workflow", "logs")
+#star_outpath = os.path.join("data", "star")
 
 # Define se fastq output only
 #ALL_FQ = expand(
