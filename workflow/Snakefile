@@ -28,7 +28,8 @@ star_outpath = os.path.join("data", "star")
 ## unsure how to specify a path outside of this directory, 
 ## or do I mv/cp the genome and index in here
 ## or specify in the config?
-## or an absolute path in the star.smk input: ?
+## or an absolute path in the star.smk input: ? YES thats where it is
+get_gtf = os.path.join("/hpcfs/user/a1627307/genome")
 
 
 # Define se fastq output only
@@ -55,4 +56,5 @@ rule all:
 
 include: "rules/fasterq-dump.smk"
 include: "rules/fastp.smk"
-#include: "rules/star.smk"
+include: "rules/star.smk"
+include: "rules/feature-counts.smk"

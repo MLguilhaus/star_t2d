@@ -40,7 +40,8 @@ rule star_align:
           --runThreadN {threads} \
           --genomeDir {params.index} \
           ### no params in below arg atm, clarify what was there with SP. 
-          ### {params.extra} \
+          ### ok to leave blank
+          --{params.extra} \
           --readFilesIn {input.r1} {input.r2} \
           --readFilesCommand zcat \
           --outSAMtype {params.out_samtype} \
@@ -67,6 +68,7 @@ rule star_align:
 ### Again, a SP addition to do with git logs, 
 ### clairfy what they meant by this (should have written it down, 
 ### remember to write down what stevie says/keep a notebook hand when given instruction) 
+#### useful to have with git, more notes in physical notes
 rule copy_star_logs:
     input:
         star_log = rules.star_align.output.star_log,
@@ -96,6 +98,7 @@ rule copy_star_logs:
 
 ### Gives stats on primary mapped, secondary mapped, duplicates etc
 ### May not need this either
+### may as well keep, not very intense computationally, may as well haved
 rule star_flagstat:
     input: 
         bam = os.path.join(
