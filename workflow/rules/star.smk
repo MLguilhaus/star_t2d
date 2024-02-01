@@ -19,14 +19,14 @@ rule star_align:
     conda: "../envs/star.yml"
     log: os.path.join(log_path, "star_align", "{accession}.log") #star_align defined where? 
     params:
-        index = os.path.join(star_ref_path),
+        index = config['star']['star_ref_path'],
         out_prefix = os.path.join(star_outpath, "{accession}", ""),
         out_samtype = config['star']['out_samtype'],
         out_samattributes = config['star']['out_samattributes'],
         out_samunmapped = config['star']['out_samunmapped'],
         multimap_nmax = config['star']['multimap_nmax'],
         mismatch_nmax = config['star']['mismatch_nmax'],
-        #extra = config['star']['extra'],
+        extra = config['star']['extra'],
         temp_dir = os.path.join(
             star_outpath, "{accession}", "_STARtmp"
         )
@@ -36,11 +36,11 @@ rule star_align:
         mem_mb = 32768
     shell:
         """
-        RAM_BYTES=$(({resources.mem_mb} * 1024 * 1024))
         STAR \
           --runThreadN {threads} \
-          --genomeDir {params.index} \ 
-          {params.extra} \
+          --genomeDir {params.index} \
+          ### no params in below arg atm, clarify what was there with SP. 
+          ### {params.extra} \
           --readFilesIn {input.r1} {input.r2} \
           --readFilesCommand zcat \
           --outSAMtype {params.out_samtype} \
@@ -51,6 +51,7 @@ rule star_align:
           --outFileNamePrefix {params.out_prefix} \
           --outStd Log &>> {log}
         
+        ### Also to do with SP bug fix, clairfy. 
         ## Deleting this here ensures it is **retained on failure**, but
         ## removed on success as it is entirely redundant at that point
         echo -e "Deleting Log.progress.out"
@@ -63,6 +64,9 @@ rule star_align:
         fi
         """
 
+### Again, a SP addition to do with git logs, 
+### clairfy what they meant by this (should have written it down, 
+### remember to write down what stevie says/keep a notebook hand when given instruction) 
 rule copy_star_logs:
     input:
         star_log = rules.star_align.output.star_log,
@@ -90,6 +94,8 @@ rule copy_star_logs:
         cp {input.sj_out} {output.sj_out}
         """
 
+### Gives stats on primary mapped, secondary mapped, duplicates etc
+### May not need this either
 rule star_flagstat:
     input: 
         bam = os.path.join(

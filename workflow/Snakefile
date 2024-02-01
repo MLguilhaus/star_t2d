@@ -24,7 +24,12 @@ raw_path = os.path.join("data", "fastq", "raw")
 trim_path = os.path.join("data", "fastq", "trimmed")
 fastp_outpath = os.path.join("output", "fastp")
 log_path = os.path.join("workflow", "logs")
-#star_outpath = os.path.join("data", "star")
+star_outpath = os.path.join("data", "star")
+## unsure how to specify a path outside of this directory, 
+## or do I mv/cp the genome and index in here
+## or specify in the config?
+## or an absolute path in the star.smk input: ?
+
 
 # Define se fastq output only
 #ALL_FQ = expand(
@@ -50,3 +55,4 @@ rule all:
 
 include: "rules/fasterq-dump.smk"
 include: "rules/fastp.smk"
+#include: "rules/star.smk"
