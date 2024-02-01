@@ -13,4 +13,6 @@ star:
   out_samunmapped: "Within KeepPairs" #unsuure if we want 'keep pairs'
   multimap_nmax: 10
   mismatch_nmax: 10
-  #extra: 
+  star_ref_path: "/hpcfs/user/a1627307/genome"
+  extra: 
+
