@@ -126,10 +126,10 @@ rule star_md5sums:
     input:
         expand(
             os.path.join(
-                star_outpath, "{{build}}", "{accession}",
+                star_outpath, "{{build}}", "{sample}",
                 "Aligned.sortedByCoord.out.bam"
             ),
-            accession = accession_table['accession']
+            sample = accessions
         )
     output:
         os.path.join(star_outpath, "{build}", "md5sums.txt")

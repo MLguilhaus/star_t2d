@@ -9,12 +9,12 @@ rule feature_counts_star:
             os.path.join(star_outpath, "{sample}", "{bam}"),
             bam = ["Aligned.sortedByCoord.out.bam"],
             # SP said something here about lane samples, change to acession?
-            sample = ln_samples
+            sample = accessions
         ),
         bai = expand(
             os.path.join(star_outpath, "{sample}", "{bai}"),
             bai = ["Aligned.sortedByCoord.out.bam.bai"],
-            sample = ln_samples
+            sample = accessions
         ),
         gtf = get_gtf
     output:
