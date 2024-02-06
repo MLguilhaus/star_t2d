@@ -10,10 +10,11 @@ fastp:
 star: 
   out_samattributes: "Standard"
   out_samtype: "BAM SortedByCoordinate"
-  out_samunmapped: "Within KeepPairs" #unsuure if we want 'keep pairs'
+  out_samunmapped: "Within KeepPairs" 
   multimap_nmax: 10
   mismatch_nmax: 10
-  star_ref_path: "/hpcfs/user/a1627307/genome"
+  # do we want the index and genome in same directory for this?
+  star_ref_path: "/hpcfs/users/a1627307/genome/STAR/GRCh38_y_masked"
   extra: 
 
 
@@ -23,6 +24,7 @@ featureCounts:
   fracOverlap: 0.9
   strandedness: 1
   extra: "-p -B -M --fraction"
+  gtf: "/hpcfs/user/a1627307/genome/gencode.v29.annotation.gtf"
 
 samtools:
   extra:

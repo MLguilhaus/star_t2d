@@ -75,23 +75,16 @@ rule copy_star_logs:
         sj_out = rules.star_align.output.sj_out
     output:
         star_log = os.path.join(
-            starlog_path, "{build}", "{accession}_Log.final.out"
+            starlog_path, "{accession}_Log.final.out"
         ),
         sj_out = os.path.join(
-            starlog_path, "{build}", "{accession}_SJ.out.tab"
-        )
-    params:
-        dir = os.path.dirname(
-            os.path.join(starlog_path, "{build}", "{accession}")
+            starlog_path, "{accession}_SJ.out.tab"
         )
     threads: 1
     resources:
         runtime = "1m"
     shell:
         """
-        if [[ ! -d {params.dir} ]]; then
-            mkdir -p {params.dir}
-        fi
         cp {input.star_log} {output.star_log}
         cp {input.sj_out} {output.sj_out}
         """
