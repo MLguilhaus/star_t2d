@@ -8,7 +8,6 @@ rule feature_counts_star:
         bam = expand(
             os.path.join(star_outpath, "{sample}", "{bam}"),
             bam = ["Aligned.sortedByCoord.out.bam"],
-            # SP said something here about lane samples, change to acession?
             sample = accessions
         ),
         bai = expand(
@@ -16,7 +15,9 @@ rule feature_counts_star:
             bai = ["Aligned.sortedByCoord.out.bam.bai"],
             sample = accessions
         ),
-        gtf = get_gtf
+        # is this ok?
+        #gtf = config['featureCounts']['gtf']
+        gtf = gtf_path
     output:
         counts = os.path.join(fcount_path, "star_counts.out"),
         summary = os.path.join(fcount_path, "star_counts.out.summary")
