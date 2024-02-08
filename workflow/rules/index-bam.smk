@@ -1,16 +1,10 @@
 rule index_bam:
     input:
-        bam = expand(
-            os.path.join(star_outpath, "{sample}", "{bam}"),
-            bam = ["Aligned.sortedByCoord.out.bam"],
-            sample = accessions
-            ),
+         bam = os.path.join(star_outpath, "{sample}", 
+            "Aligned.sortedByCoord.out.bam"),
     output:
-        bai = expand(
-            os.path.join(star_outpath, "{sample}", "{bai}"),
-            bai = ["Aligned.sortedByCoord.out.bam.bai"],
-            sample = accessions
-        ),
+        bai = os.path.join(star_outpath, "{sample}",
+            "Aligned.sortedByCoord.out.bam.bai"),  
     params:
         extra = config['samtools']['extra']
     shell:
