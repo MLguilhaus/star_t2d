@@ -15,8 +15,7 @@ rule feature_counts_star:
             bai = ["Aligned.sortedByCoord.out.bam.bai"],
             sample = accessions
         ),
-        # is this ok?
-        #gtf = config['featureCounts']['gtf']
+
         gtf = gtf_path
     output:
         counts = os.path.join(fcount_path, "star_counts.out"),
@@ -25,7 +24,7 @@ rule feature_counts_star:
     log: os.path.join(log_path, "feature_counts", "star_feature_counts.log")
     threads: 12
     resources:
-        runtime = "6:00:00",
+        runtime = "6h",
         mem_mb = 8192
     params:
         minOverlap = config['featureCounts']['minOverlap'],

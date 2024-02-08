@@ -25,16 +25,14 @@ trim_path = os.path.join("data", "fastq", "trimmed")
 fastp_outpath = os.path.join("output", "fastp")
 log_path = os.path.join("workflow", "logs")
 star_outpath = os.path.join("data", "star")
-starlog_path = os.path.join("workflow", "logs", "star")
+starlog_path = os.path.join("output", "star")
 ## unsure how to specify a path outside of this directory, 
 ## or do I mv/cp the genome and index in here
 ## or specify in the config?
 ## or an absolute path in the star.smk input: ? YES thats where it is
 # can put this here? better in config? is this ok if its an input?
-gtf_path = ("/hpcfs/user/a1627307/genome/gencode.v29.annotation.gtf")
+gtf_path = ("/hpcfs/users/a1627307/genome/gencode.v45.primary_assembly.annotation.gtf")
 fcount_path = os.path.join("output", "counts")
-
-
 
 # Define se fastq output only
 ALL_FQ = expand(
@@ -58,8 +56,8 @@ ALL_STARLOGS = expand(
 	id = accessions, f = ['Log.final.out', 'SJ.out.tab']
 )
 ALL_BAI = expand(
-	os.path.join(star_outpath, "{id}", "Aligned.sortedByCoord.out.bam.bai"),
-    id = accessions
+ 	os.path.join(star_outpath, "{id}", "Aligned.sortedByCoord.out.bam.bai"),
+     id = accessions
 )
 ALL_COUNTS = expand(
 	os.path.join(fcount_path, "star_counts.{suffix}"),
