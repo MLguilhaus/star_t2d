@@ -23,6 +23,7 @@ wildcard_constraints:
 raw_path = os.path.join("data", "fastq", "raw")
 trim_path = os.path.join("data", "fastq", "trimmed")
 fastp_outpath = os.path.join("output", "fastp")
+qc_path = os.path.join("output", "multiqc")
 log_path = os.path.join("workflow", "logs")
 star_outpath = os.path.join("data", "star")
 starlog_path = os.path.join("output", "star")
@@ -43,6 +44,8 @@ ALL_FP = expand(
     os.path.join(fastp_outpath, "{f}_fastp.{suffix}"),
 	 f = accessions, suffix = ['json', 'html']
 )
+# ALL_MQC = os.path.join(qc_path, "multiqc.html")
+
 ALL_MD5 = expand(
 	os.path.join("{path}", "md5sums.txt"),
 	path = [raw_path, trim_path]
@@ -68,6 +71,7 @@ ALL_OUTPUTS = []
 ALL_OUTPUTS.extend(ALL_MD5)
 ALL_OUTPUTS.extend(ALL_FQ)
 ALL_OUTPUTS.extend(ALL_FP)
+# ALL_OUTPUTS.extend(ALL_MQC)
 ALL_OUTPUTS.extend(ALL_BAM)
 ALL_OUTPUTS.extend(ALL_STARLOGS)
 ALL_OUTPUTS.extend(ALL_BAI)
@@ -79,6 +83,7 @@ rule all:
 
 include: "rules/fasterq-dump.smk"
 include: "rules/fastp.smk"
+# include: "rules/multiqc.smk"
 include: "rules/star.smk"
 include: "rules/feature-counts.smk"
 include: "rules/index-bam.smk"

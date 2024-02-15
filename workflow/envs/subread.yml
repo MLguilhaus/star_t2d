@@ -1,6 +1,0 @@
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - subread == 2.0

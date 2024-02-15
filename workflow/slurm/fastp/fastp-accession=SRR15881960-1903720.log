@@ -1,0 +1,24 @@
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however crucial for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Using shell: /usr/bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Provided resources: mem_mb=2048, mem_mib=1954, disk_mb=6039, disk_mib=5760
+Select jobs to execute...
+
+[Thu Feb  8 14:53:52 2024]
+rule fastp:
+    input: data/fastq/raw/SRR15881960_1.fastq.gz, data/fastq/raw/SRR15881960_2.fastq.gz
+    output: data/fastq/trimmed/SRR15881960_1.fastq.gz, data/fastq/trimmed/SRR15881960_2.fastq.gz, output/fastp/SRR15881960_fastp.html, output/fastp/SRR15881960_fastp.json
+    log: workflow/logs/fastp/SRR15881960.log
+    jobid: 0
+    reason: Forced execution
+    wildcards: accession=SRR15881960
+    threads: 4
+    resources: mem_mb=2048, mem_mib=1954, disk_mb=6039, disk_mib=5760, tmpdir=/mnt/tmp_local/lls_1903720, runtime=120
+
+
+        fastp             --thread 4             --n_base_limit 1             --average_qual 30             --cut_front             --cut_mean_quality 30             --length_required 50             --overrepresentation_analysis             -i data/fastq/raw/SRR15881960_1.fastq.gz             -I data/fastq/raw/SRR15881960_2.fastq.gz             -o data/fastq/trimmed/SRR15881960_1.fastq.gz             -O data/fastq/trimmed/SRR15881960_2.fastq.gz             -h output/fastp/SRR15881960_fastp.html             -j output/fastp/SRR15881960_fastp.json &> workflow/logs/fastp/SRR15881960.log
+        
+Activating conda environment: ../../envs/1fad0e7e02c206763c147f4a9de2ddc8_
+slurmstepd: error: *** JOB 1903720 ON p2-cpu-14 CANCELLED AT 2024-02-08T14:53:59 ***

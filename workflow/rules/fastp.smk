@@ -17,13 +17,15 @@ rule fastp:
     log: os.path.join(log_path, "fastp", "{accession}.log")
     threads: 4
     resources:
-        runtime="2h"
+        runtime="2h",
+        mem_mb = 4096
     shell:
         """
         fastp \
             --thread {threads} \
             --n_base_limit {params.n_base_limit} \
             --average_qual {params.average_qual} \
+            --cut_front \
             --cut_mean_quality {params.cut_mean_quality} \
             --length_required {params.length_required} \
             {params.extra} \

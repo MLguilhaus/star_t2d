@@ -7,6 +7,9 @@ fastp:
   n_base_limit: 1
   extra: "--overrepresentation_analysis" 
 
+multiqc: 
+  extra:
+
 star: 
   out_samattributes: "Standard"
   out_samtype: "BAM SortedByCoordinate"
@@ -16,7 +19,6 @@ star:
   # do we want the index and genome in same directory for this?
   star_ref_path: "/hpcfs/users/a1627307/genome/STAR/GRCh38_y_masked"
   extra: 
-
 
 featureCounts:
   minQual: 1

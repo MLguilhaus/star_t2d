@@ -2,3 +2,4 @@
 data/fastq/raw/*gz
 data/fastq/trimmed/*gz
 workflow/logs/*
+workflow/output/fastp/*

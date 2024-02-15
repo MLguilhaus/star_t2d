@@ -20,7 +20,7 @@ rule feature_counts_star:
     output:
         counts = os.path.join(fcount_path, "star_counts.out"),
         summary = os.path.join(fcount_path, "star_counts.out.summary")
-    conda: "../envs/subread.yml"
+    conda: "../envs/feature-counts.yml"
     log: os.path.join(log_path, "feature_counts", "star_feature_counts.log")
     threads: 12
     resources:
