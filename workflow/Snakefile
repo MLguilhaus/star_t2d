@@ -36,20 +36,25 @@ gtf_path = ("/hpcfs/users/a1627307/genome/gencode.v45.primary_assembly.annotatio
 fcount_path = os.path.join("output", "counts")
 
 # Define se fastq output only
-ALL_FQ = expand(
-   os.path.join(raw_path, "{f}_{r}.fastq.gz"),
-	r = ['1', '2'], f = accessions
-)
+# ALL_FQ = expand(
+#    os.path.join(raw_path, "{f}_{r}.fastq.gz"),
+# 	r = ['1', '2'], f = accessions
+# )
 ALL_FP = expand(
     os.path.join(fastp_outpath, "{f}_fastp.{suffix}"),
 	 f = accessions, suffix = ['json', 'html']
 )
 # ALL_MQC = os.path.join(qc_path, "multiqc.html")
 
-ALL_MD5 = expand(
-	os.path.join("{path}", "md5sums.txt"),
-	path = [raw_path, trim_path]
-)
+# ALL_MD5 = expand(
+# 	os.path.join("{path}", "md5sums.txt"),
+# 	path = [ raw_path]
+# )
+
+# ALL_MD5 = expand(
+# 	os.path.join("{path}", "md5sums.txt"),
+# 	path = [ trim_path]
+# )
 ALL_BAM = expand(
 	os.path.join(star_outpath, "{id}", "Aligned.sortedByCoord.out.bam"),
 	id = accessions
@@ -68,8 +73,8 @@ ALL_COUNTS = expand(
 )
 
 ALL_OUTPUTS = []
-ALL_OUTPUTS.extend(ALL_MD5)
-ALL_OUTPUTS.extend(ALL_FQ)
+# ALL_OUTPUTS.extend(ALL_MD5)
+# ALL_OUTPUTS.extend(ALL_FQ)
 ALL_OUTPUTS.extend(ALL_FP)
 # ALL_OUTPUTS.extend(ALL_MQC)
 ALL_OUTPUTS.extend(ALL_BAM)
@@ -81,7 +86,7 @@ rule all:
 	input:
 		ALL_OUTPUTS
 
-include: "rules/fasterq-dump.smk"
+# include: "rules/fasterq-dump.smk"
 include: "rules/fastp.smk"
 # include: "rules/multiqc.smk"
 include: "rules/star.smk"

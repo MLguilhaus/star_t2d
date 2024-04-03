@@ -48,7 +48,7 @@ rule trimmed_md5sums:
         os.path.join(trim_path, "md5sums.txt")
     threads: 1
     resources:
-        runtime="10m"
+        runtime="20m"
     shell:
         """
         md5sum {input} > {output}

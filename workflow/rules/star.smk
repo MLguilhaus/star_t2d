@@ -17,7 +17,7 @@ rule star_align:
             star_outpath, "{accession}", "Log.out"
         )
     conda: "../envs/star.yml"
-    log: os.path.join(log_path, "star_align", "{accession}.log") #star_align defined where? 
+    log: os.path.join(log_path, "star_align", "{accession}.log") 
     params:
         index = config['star']['star_ref_path'],
         out_prefix = os.path.join(star_outpath, "{accession}", ""),
@@ -26,7 +26,6 @@ rule star_align:
         out_samunmapped = config['star']['out_samunmapped'],
         multimap_nmax = config['star']['multimap_nmax'],
         mismatch_nmax = config['star']['mismatch_nmax'],
-        extra = config['star']['extra'],
         temp_dir = os.path.join(
             star_outpath, "{accession}", "_STARtmp"
         )
@@ -39,9 +38,6 @@ rule star_align:
         STAR \
           --runThreadN {threads} \
           --genomeDir {params.index} \
-          ### no params in below arg atm, clarify what was there with SP. 
-          ### ok to leave blank
-          --{params.extra} \
           --readFilesIn {input.r1} {input.r2} \
           --readFilesCommand zcat \
           --outSAMtype {params.out_samtype} \
@@ -52,7 +48,6 @@ rule star_align:
           --outFileNamePrefix {params.out_prefix} \
           --outStd Log &>> {log}
         
-        ### Also to do with SP bug fix, clairfy. 
         ## Deleting this here ensures it is **retained on failure**, but
         ## removed on success as it is entirely redundant at that point
         echo -e "Deleting Log.progress.out"
@@ -128,7 +123,7 @@ rule star_md5sums:
         os.path.join(star_outpath, "{build}", "md5sums.txt")
     threads: 1
     resources:
-        runtime="10m"
+        runtime="20m"
     shell:
         """
         md5sum {input} > {output}

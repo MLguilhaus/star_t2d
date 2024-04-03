@@ -24,10 +24,10 @@ featureCounts:
   minQual: 1
   minOverlap: 35
   fracOverlap: 0.9
-  strandedness: 1
+  strandedness: 2
   extra: "-p -B -M --fraction"
   gtf: "/hpcfs/user/a1627307/genome/gencode.v45.primary_assembly.annotation.gtf"
 
-samtools:
-  extra:
+# samtools:
+#   extra: 
 

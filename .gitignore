@@ -1,5 +1,8 @@
 .snakemake
 data/fastq/raw/*gz
 data/fastq/trimmed/*gz
+data/star/*
 workflow/logs/*
 workflow/output/fastp/*
+workflow/output/counts/*
+workflow/slurm/*
