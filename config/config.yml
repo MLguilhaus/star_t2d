@@ -24,7 +24,7 @@ featureCounts:
   minQual: 1
   minOverlap: 35
   fracOverlap: 0.9
-  strandedness: 0 # Changed from 1 to 2 as counts were way too low
+  strandedness: 2 # Changed from 1 to 2 as counts were way too low
   extra: "-p -B -M --fraction"
   gtf: "/hpcfs/user/a1627307/genome/gencode.v45.primary_assembly.annotation.gtf"
 

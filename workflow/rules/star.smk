@@ -90,16 +90,16 @@ rule copy_star_logs:
 rule star_flagstat:
     input: 
         bam = os.path.join(
-            star_outpath, "{build}", "{accession}",
+            star_outpath, "{accession}",
             "Aligned.sortedByCoord.out.bam"
         ),
         bai = os.path.join(
-            star_outpath, "{build}", "{accession}", 
+            star_outpath, "{accession}", 
             "Aligned.sortedByCoord.out.bam.bai"
         )
     output:
         os.path.join(
-            starlog_path, "{build}", "{accession}_samtools.flagstat"
+            starlog_path, "{accession}_samtools.flagstat"
         )
     conda: "../envs/samtools.yml"
     threads: 4
@@ -114,13 +114,13 @@ rule star_md5sums:
     input:
         expand(
             os.path.join(
-                star_outpath, "{{build}}", "{sample}",
+                star_outpath, "{sample}",
                 "Aligned.sortedByCoord.out.bam"
             ),
             sample = accessions
         )
     output:
-        os.path.join(star_outpath, "{build}", "md5sums.txt")
+        os.path.join(star_outpath, "md5sums.txt")
     threads: 1
     resources:
         runtime="20m"
