@@ -51,10 +51,10 @@ ALL_FP = expand(
 # 	path = [ raw_path]
 # )
 
-# ALL_MD5 = expand(
-# 	os.path.join("{path}", "md5sums.txt"),
-# 	path = [ trim_path]
-# )
+ALL_MD5 = expand(
+	os.path.join("{path}", "md5sums.txt"),
+	path = [ trim_path]
+)
 ALL_BAM = expand(
 	os.path.join(star_outpath, "{id}", "Aligned.sortedByCoord.out.bam"),
 	id = accessions
@@ -77,7 +77,7 @@ ALL_COUNTS = expand(
 )
 
 ALL_OUTPUTS = []
-# ALL_OUTPUTS.extend(ALL_MD5)
+ALL_OUTPUTS.extend(ALL_MD5)
 # ALL_OUTPUTS.extend(ALL_FQ)
 ALL_OUTPUTS.extend(ALL_FP)
 # ALL_OUTPUTS.extend(ALL_MQC)
